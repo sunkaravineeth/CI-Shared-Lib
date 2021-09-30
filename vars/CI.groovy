@@ -36,8 +36,20 @@ def call( Map config) {
     environment{
         ARTIFACTID = readMavenPom.getArtifactId()
         VERSION = readMavenPom.getVersion()
+    }
+    
+    stages{
+      stage("Initialization"){
+        steps{
+          script{
+            echo "----initialization----"
+            sh "java --version"
+            sh " mvn --version"
+          }
+        }
       }
-      
+    }
+     
   }
   
 }
