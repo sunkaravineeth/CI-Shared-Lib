@@ -11,8 +11,33 @@ def call( Map config) {
   return
   }
   
-  this.configuration = configuration
+  this.config = config
   
-  
+  pipeline{
+    agent any
+    
+    options{
+      
+      timeout(
+        time: config.timeoutTime ? config.timeoutTime : 6,
+        unit: config.timeoutUnit ? config. timoutTUnit: "HOURS"
+      )
+      
+      diableConcurrentBuilds()
+      
+      buildDiscarder(
+        logRotator(
+          numToKeepStr: config.logRotatorNumToKeep ? config.logRotatorNumToKeep : '30', 
+          artifactNumToKeepStr: config.logRotatorArtifactNumToKeep ? config.logRotatorArtifactNumToKeep : '3'
+        )
+      )    
+    }
+    
+    environment{
+        ARTIFACTID = readMavenPom.getArtifactId()
+        VERSION = readMavenPom.getVersion()
+      }
+      
+  }
   
 }
