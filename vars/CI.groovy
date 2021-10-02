@@ -40,13 +40,7 @@ def call( Map config) {
     stages{
       stage("Initialization"){
         steps{
-          script{
-            echo "----initialization----"
-            pom = readFile(file: 'gameoflife-web/pom.xml');
-            def sam = pom.getVersion()
-            echo " version: ${ sam }"
-            
-          }
+          sh " mvn -Dmaven.test.failure.ignore=true clean package"
         }
       }
     }
