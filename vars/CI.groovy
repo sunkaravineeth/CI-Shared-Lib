@@ -34,8 +34,9 @@ def call( Map config) {
     }
     
     environment{
-        ARTIFACTID = readMavenPom.getArtifactId()
-        VERSION = readMavenPom.getVersion()
+      pom = readMavenPom file: 'pom.xml'
+       ARTIFACTID = pom.artifactId
+        VERSION = pom.version
     }
     
     stages{
