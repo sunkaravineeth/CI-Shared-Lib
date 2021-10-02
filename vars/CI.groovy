@@ -43,7 +43,9 @@ def call( Map config) {
           script{
             echo "----initialization----"
             pom = readFile(file: 'gameoflife-web/pom.xml');
-            echo "IMAGE: ${pom.version}"
+            def sam = pom.getVersion()
+            echo " version: ${ sam }"
+            
           }
         }
       }
