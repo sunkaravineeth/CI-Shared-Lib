@@ -34,6 +34,7 @@ def call( Map config) {
     }
     
     environment{
+      NEXUS = "nexus"
     }
     
     stages{
