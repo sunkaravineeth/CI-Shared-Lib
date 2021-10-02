@@ -23,7 +23,7 @@ def call( Map config) {
         unit: config.timeoutUnit ? config. timoutTUnit: "HOURS"
       )
       
-      diableConcurrentBuilds()
+      disableConcurrentBuilds()
       
       buildDiscarder(
         logRotator(
