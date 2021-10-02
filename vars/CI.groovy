@@ -44,7 +44,7 @@ def call( Map config) {
           script{
             echo "----initialization----"
             sh "java -version"
-            sh " mvn --version"
+            sh "mvn --version"
           }
         }
       }
