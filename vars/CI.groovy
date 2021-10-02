@@ -42,7 +42,7 @@ def call( Map config) {
         steps{
           script{
             echo "----initialization----"
-            pom = readMavenPom(file: 'gameoflife-web/pom/xml');
+            pom = readFile(file: 'gameoflife-web/pom/xml');
             echo "IMAGE: ${pom.version}"
           }
         }
