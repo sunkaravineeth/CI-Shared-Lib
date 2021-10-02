@@ -34,8 +34,6 @@ def call( Map config) {
     }
     
     environment{
-      pom = readMavenPom file: 'pom.xml'
-      ver = pom.version
     }
     
     stages{
@@ -43,7 +41,8 @@ def call( Map config) {
         steps{
           script{
             echo "----initialization----"
-            echo "IMAGE: ${ver}"
+            pom = reasdMavenPom file: "gameoflife-web/pom/xml";
+            echo "IMAGE: ${pom.version}"
           }
         }
       }
