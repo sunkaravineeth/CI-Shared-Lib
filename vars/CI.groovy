@@ -34,9 +34,8 @@ def call( Map config) {
     }
     
     environment{
-      pom = readMavenPom file: 'pom.xml'
-       ARTIFACTID = pom.artifactId
-        VERSION = pom.version
+      IMAGE = readMavenPom().getArtifactId()
+      VERSION = readMavenPom().getVersion()
     }
     
     stages{
@@ -44,6 +43,8 @@ def call( Map config) {
         steps{
           script{
             echo "----initialization----"
+            echo "IMAGE: ${IMAGE}"
+            echo "VERSION: ${VERSION}"
           }
         }
       }
