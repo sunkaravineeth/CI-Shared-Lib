@@ -33,10 +33,6 @@ def call( Map config) {
       )    
     }
     
-    environment{
-      ARTIFACTID = readMavenPom().getArtifactId()
-    }
-    
     stages{
       stage("Initialization"){
         steps{
@@ -44,7 +40,8 @@ def call( Map config) {
             echo "---checking tools versions-------"
             sh "java -version"
             sh "mvn -v"
-            echo " artifactid: {ARTIFACTID} "
+            def pom = readFile(file: "gameoflife-web/pom.xml")
+            echo " version: $pom.version "
           }
         }
       }
