@@ -60,7 +60,13 @@ def call( Map config) {
         }
       }
     }
-     
+    
+    post{
+      always{
+        junit '**/target/surefire-reports/*.xml'
+        archiveArtifacts artifacts: '**/target/*.war', allowEmptyArchive: true
+      }
+    }
   }
   
 }
