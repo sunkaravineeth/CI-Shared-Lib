@@ -34,13 +34,18 @@ def call( Map config) {
     }
     
     environment{
-      NEXUS = "nexus"
+      ARTIFACTID = readMavenPom().getArtifactId()
     }
     
     stages{
       stage("Initialization"){
         steps{
-          sh " mvn -Dmaven.test.failure.ignore=true clean package"
+          script{
+            echo "---checking tools versions-------"
+            sh "java -version"
+            sh "mvn -v"
+            echo " artifactid: {ARTIFACTID} "
+          }
         }
       }
     }
