@@ -33,6 +33,17 @@ def call( Map config) {
       )    
     }
     
+    environment{
+      def uploadSpec = """{
+     "files": [
+      {
+          "pattern": "**/*.jar",
+          "target": "game/"
+        }
+     ]
+     }"""
+    }
+    
     stages{
       stage("Initialization"){
         steps{
@@ -57,6 +68,18 @@ def call( Map config) {
         steps{
           echo "==package=="
           sh "mvn -DskipTests package"
+        }
+      }
+      
+      stage("artifact upload"){
+        steps{
+          echo 'Publish the artifacts..'
+          script{
+                        def server = Artifactory.newServer('http://20.83.33.195:8082/artifactory', 'admin', 'Vineethraj7@')
+                        server.bypassProxy = true
+                        server.upload(uploadSpec)
+                        echo 'Uploaded the file to Jfrog Artifactory successfully'
+          }              
         }
       }
     }
