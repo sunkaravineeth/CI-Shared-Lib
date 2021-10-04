@@ -41,9 +41,22 @@ def call( Map config) {
             sh "java -version"
             sh "mvn -v"
             def pom = readFile(file: "gameoflife-web/pom.xml")
-            def data = new XmlParser().parseText(pom)
-            print data.version
+            
           }
+        }
+      }
+      
+      stage("unit test"){
+        steps{
+          echo "==unit test=="
+          sh "mvn --settings settings.xml clean test"
+        }
+      }
+      
+      stage("build"){
+        steps{
+          echo "==package=="
+          sh "mvn --settings settings.xml -DskipTests package"
         }
       }
     }
