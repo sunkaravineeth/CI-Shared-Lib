@@ -41,7 +41,7 @@ def call( Map config) {
             sh "java -version"
             sh "mvn -v"
             def pom = readFile(file: "gameoflife-web/pom.xml")
-            def rootNode = new XmlParser().parseText(xml)
+            def rootNode = new XmlParser().parseText(pom)
             print Double.parseDouble(rootNode.version)
           }
         }
