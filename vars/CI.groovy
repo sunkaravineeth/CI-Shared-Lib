@@ -49,14 +49,14 @@ def call( Map config) {
       stage("unit test"){
         steps{
           echo "==unit test=="
-          sh "mvn --settings settings.xml clean test"
+          sh "mvn clean test"
         }
       }
       
       stage("build"){
         steps{
           echo "==package=="
-          sh "mvn --settings settings.xml -DskipTests package"
+          sh "mvn -DskipTests package"
         }
       }
     }
