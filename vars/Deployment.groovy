@@ -52,6 +52,11 @@ def call( Map config) {
             sh "mvn -v"
             pom = readMavenPom file: "pom.xml"
             echo "articat: ${pom.getArtifactId()}"
+            echo "articat: ${pom.getVersion()}"
+            echo "articat: ${pom.getPackaging()}"
+            echo "articat: ${pom.getUrl()}"
+            echo "articat: ${pom.getGroupId()}"
+            echo "articat: ${pom.getModelVersion()}"
             
           }
         }
