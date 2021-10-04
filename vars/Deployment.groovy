@@ -33,14 +33,8 @@ def call( Map config) {
     }
     
     environment{
-      def uploadSpec = """{
-     "files": [
-      {
-          "pattern": "**/*.jar",
-          "target": "game/"
-        }
-     ]
-     }"""
+      ARTIFACTID = readMavenPom().getArtifactId()
+      VERSION = readMavenPom().getVersion()
     }
     
     stages{
@@ -51,12 +45,8 @@ def call( Map config) {
             sh "java -version"
             sh "mvn -v"
             pom = readMavenPom file: "pom.xml"
-            echo "articat: ${pom.getArtifactId()}"
-            echo "articat: ${pom.getVersion()}"
-            echo "articat: ${pom.getPackaging()}"
-            echo "articat: ${pom.getUrl()}"
-            echo "articat: ${pom.getGroupId()}"
-            echo "articat: ${pom.getModelVersion()}"
+            echo "artifact: ${ARTIFACTID}"
+            echo "version: ${VERSION}"
             
           }
         }
