@@ -41,6 +41,7 @@ def call( Map config) {
             sh "java -version"
             sh "mvn -v"
             def pom = readFile(file: "gameoflife-web/pom.xml")
+            println(pom)
           }
         }
       }
