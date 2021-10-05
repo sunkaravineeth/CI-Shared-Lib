@@ -57,7 +57,17 @@ def call( Map config) {
           script{
             echo "--------Deploy--------"
             def chooseRef
-            sh "git tag -l --sort=refname g*"
+            sh "git tag -l > git-tags.txt"
+            git_tags = readFile "git-tags.txt"
+            timeout(time: 5, unit: 'MINUTES'){
+              chooseRef = input message: "version to deploy", ok: "proceed", parameters: [
+                choice(choices: git_tags, name: 'Git tag', description: 'select git tag for deployment'),
+                string(
+                  description: 'this is going to override the default tag',
+                  name: 'Branch name'
+                  )
+                ]
+            }
             
           }
         }
