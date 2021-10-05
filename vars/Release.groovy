@@ -57,7 +57,7 @@ def call( Map config) {
           script{
             echo "--------Deploy--------"
             def chooseRef
-            sh "git tag -l"
+            sh "git tag -l --sort=refname g*"
             
           }
         }
