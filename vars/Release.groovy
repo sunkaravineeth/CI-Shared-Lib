@@ -75,6 +75,20 @@ def call( Map config) {
         }
       }
       
+      stage("read type of deployment"){
+        steps{
+          script{
+            dply_type=['install','update']
+            timeout(time: 5, unit: 'MINUTES'){
+              chooseRef = input message: "Type of Deployment", ok: "proceed", 
+              parameters: [
+                choice(choices: dply_type, name: 'Deployment Type', description: 'select type of deployment')
+              ]
+            }
+          }
+        }
+      }
+      
     }
   }
 }
