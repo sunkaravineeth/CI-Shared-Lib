@@ -69,6 +69,8 @@ def call( Map config) {
                 ]
             }
             
+            sh "git checkout ${chooseRef['Git tag']}"
+            echo "value: ${chooseRef['Git tag']}"
           }
         }
       }
