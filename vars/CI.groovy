@@ -90,7 +90,7 @@ def call( Map config) {
     post{
       always{
         junit '**/target/surefire-reports/*.xml'
-        archiveArtifacts artifacts: '**/target/${ARTIFACTID}.war', allowEmptyArchive: true
+        archiveArtifacts artifacts: '**/target/*.war', allowEmptyArchive: true
       }
     }
   }
