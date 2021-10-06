@@ -35,6 +35,15 @@ def call( Map config) {
     environment{
       ARTIFACTID = readMavenPom().getArtifactId()
       VERSION = readMavenPom().getVersion()
+      def downloadSpec = """{
+     "files": [
+      {
+          "pattern": "**/*.jar",
+          "target": "game/"
+        }
+     ]
+     }"""
+      
     }
     
     stages{
