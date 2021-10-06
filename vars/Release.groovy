@@ -38,8 +38,8 @@ def call( Map config) {
       def downloadSpec = """{
      "files": [
       {
-          "pattern": "**/*.jar",
-          "target": "game/"
+          "pattern": "game-of-life-SNAPSHOT/",
+          "target": "/var/lib/jenkins/workspace/Release_master/"
         }
      ]
      }"""
@@ -98,6 +98,17 @@ def call( Map config) {
         }
       }
       
+      stage("download artifacts"){
+        steps{
+          script
+                        {
+                        def server = Artifactory.newServer('http://20.83.33.195:8082/artifactory', 'admin', 'Vineethraj7@')
+                        server.bypassProxy = true
+                        server.download(downloadSpec)
+                        echo 'Downloaded the file from Jfrog Artifactory successfully'
+                        }
+        }
+      }
     }
   }
 }
