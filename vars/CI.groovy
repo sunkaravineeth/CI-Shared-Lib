@@ -34,11 +34,14 @@ def call( Map config) {
     }
     
     environment{
+      ARTIFACTID = readMavenPom().getArtifactId()
+      VERSION = readMavenPom().getVersion()
+      
       def uploadSpec = """{
      "files": [
       {
-          "pattern": "**/*.jar",
-          "target": "game/"
+          "pattern": "**/${ARTIFACTID}.war",
+          "target": "game-of-life-SNAPSHOT/"
         }
      ]
      }"""
@@ -87,7 +90,7 @@ def call( Map config) {
     post{
       always{
         junit '**/target/surefire-reports/*.xml'
-        archiveArtifacts artifacts: '**/target/*.war', allowEmptyArchive: true
+        archiveArtifacts artifacts: '**/target/${ARTIFACTID}.war', allowEmptyArchive: true
       }
     }
   }
